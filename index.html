@@ -92,12 +92,12 @@
         <span class="kicker">第 1 关 · 魔法钥匙</span>
         <h1>声音王国<br>的大门</h1>
         <p>想进入声音王国，要先找到 <b>6 把魔法钥匙</b>。</p>
-        <div class="big-pinyin">a　o　e<br>i　u　ü</div>\n        <button class="listen" data-say="啊，喔，鹅，衣，乌，迂">🔊 听六把钥匙</button>
+        <div class="big-pinyin">a　o　e<br>i　u　ü</div>\n        <div class="tip">🎧 点下面每一把钥匙听示范；听完以后，轮到你跟读。</div>
         <p>看到一个字母，就试着马上发出它的声音。</p>
         <div class="game">
           <b>🎮 声音侦探：</b>点亮今天认识的钥匙。
           <div class="game-row" id="vowelGame">
-            <button>a</button><button>o</button><button>e</button><button>i</button><button>u</button><button>ü</button>
+            <button data-pronounce="a">a 🔊</button><button data-pronounce="o">o 🔊</button><button data-pronounce="e">e 🔊</button><button data-pronounce="i">i 🔊</button><button data-pronounce="u">u 🔊</button><button data-pronounce="ü">ü 🔊</button>
           </div>
         </div>
       </div>
@@ -125,7 +125,7 @@
         <span class="kicker">第 2 关 · 声调精灵</span>
         <h2>四位声调精灵</h2>
         <p>读声调的时候，让小手也一起动起来！</p>
-        <button class="listen" data-say="妈，麻，马，骂">🔊 听四声示例</button>\n        <div class="tone-road">
+        <button class="listen" data-pronounce="tones">🎙️ 真人示范：mā má mǎ mà</button>\n        <div class="tone-road">
           <div class="tone"><b>ā</b>平平飞 ✈️</div>
           <div class="tone"><b>á</b>往上爬 ⛰️</div>
           <div class="tone"><b>ǎ</b>下再上 🎢</div>
@@ -184,7 +184,7 @@
         <div class="train">
           <div class="wagon">b</div><div class="arrow">＋</div><div class="wagon">a</div><div class="arrow">→</div><div class="wagon">ba</div>
         </div>
-        <p>先慢慢读：<b>b——a——ba</b><br>熟练以后：<b>b-a，ba！</b></p>\n        <button class="listen" data-say="八">🔊 听 ba 示例</button>
+        <p>先慢慢读：<b>b——a——ba</b><br>熟练以后：<b>b-a，ba！</b></p>\n        <button class="listen" data-pronounce="ba">🎙️ 听 bā 真人示范</button>
         <div class="game" id="blendGame">
           <b>🏎️ 拼音赛车：</b><span id="blendQuestion">m + a = ?</span>
           <div class="game-row">
@@ -210,7 +210,7 @@
       <div>
         <span class="kicker">第 5 关 · 戴帽子</span>
         <h2>声调也来坐车啦</h2>
-        <div class="big-pinyin">bā　bá<br>bǎ　bà</div>\n        <button class="listen" data-say="八，拔，把，爸">🔊 听 bā bá bǎ bà</button>
+        <div class="big-pinyin">bā　bá<br>bǎ　bà</div>\n        <button class="listen" data-pronounce="ba-tones">🔊 跟读 bā · bá · bǎ · bà</button>
         <p>声调变了，声音也会变。小耳朵要认真听。</p>
         <div class="tip">👨‍🏫 让爸爸妈妈故意读错一个，你来当小老师抓错误！</div>
       </div>
@@ -233,7 +233,7 @@
           <div class="wagon">g</div><div class="wagon">u</div><div class="wagon">a</div><div class="arrow">→</div><div class="wagon">gua</div>
         </div>
         <p>两拼熟练以后，再来挑战三拼。<b>不用抢跑！</b></p>
-        <button class="listen" data-say="瓜">🔊 听 guā</button>\n        <div class="tip">🚂 三节车厢排好队：声母 → 介母 → 韵母。</div>
+        <button class="listen" data-pronounce="gua">🎙️ 听 guā 真人示范</button>\n        <div class="tip">🚂 三节车厢排好队：声母 → 介母 → 韵母。</div>
       </div>
       <div class="art">
         <svg viewBox="0 0 520 400">
@@ -253,10 +253,10 @@
         <span class="kicker">第 7 关 · 真正阅读</span>
         <h2>我会读真正的词啦！</h2>
         <div class="cards">
-          <button class="chip" data-say="妈妈">mā ma<br><small>妈妈 · 🔊</small></button>
-          <button class="chip" data-say="爸爸">bà ba<br><small>爸爸 · 🔊</small></button>
-          <button class="chip" data-say="小猫">xiǎo māo<br><small>小猫 · 🔊</small></button>
-          <button class="chip" data-say="大米">dà mǐ<br><small>大米 · 🔊</small></button>
+          <button class="chip" data-pronounce="mama">mā ma<br><small>妈妈 · 🎙️</small></button>
+          <button class="chip" data-pronounce="baba">bà ba<br><small>爸爸 · 🎙️</small></button>
+          <button class="chip" data-pronounce="xiaomao">xiǎo māo<br><small>小猫 · 🔊</small></button>
+          <button class="chip" data-pronounce="dami">dà mǐ<br><small>大米 · 🎙️</small></button>
         </div>
         <p>拼音不是为了背表格，而是为了帮你<b>自己读出新的词</b>。</p>
         <div class="tip">🌟 今天选 2 个词，读给家人听。读出来就是胜利！</div>
@@ -338,7 +338,7 @@
     <div class="dots" id="dots" aria-label="页码"></div>
     <button id="next">下一页 →</button>
   </div>
-  <div class="footer">每天一点点，声音王国的大门就会越开越大 🌟</div>
+  <div class="footer">每天一点点，声音王国的大门就会越开越大 🌟 · <a href="AUDIO_SOURCES.md">发音音频来源与许可</a></div>
 </div>
 <div class="celebrate" id="celebrate"></div>
 
@@ -409,17 +409,8 @@
     if(hp===0){document.getElementById('bossMsg').textContent='🏆 胜利！你已经是拼音小勇士啦！';confetti()}
     else{document.getElementById('bossMsg').textContent='加油！再读一个音节！'}
   };
-  document.querySelectorAll('[data-say]').forEach(function(el){
-    el.addEventListener('click',function(){
-      if(!('speechSynthesis' in window)){alert('这个浏览器暂时不支持语音播放。');return}
-      speechSynthesis.cancel();
-      var u=new SpeechSynthesisUtterance(el.getAttribute('data-say'));
-      u.lang='zh-CN'; u.rate=.72; u.pitch=1.05;
-      speechSynthesis.speak(u);
-    });
-  });
   paintHp();
 })();
 </script>
-</body>
+<script src="audio-coach.js"></script>\n</body>
 </html>
