@@ -26,3 +26,24 @@ Shtooka Project 录音在 Commons 文件页中列明原作者与许可。请以�
 3. **一次只播一个学习目标**：避免把很多词用逗号串给 TTS，减少机械停顿。
 4. **听 → 跟读 → 再听**：真人片段结束后，界面明确提示孩子开口跟读。
 5. **加载失败自动兜底**：外部音频不可用时自动切换设备中文语音。
+
+
+## 听音训练场新增素材
+
+下面几组专门用于 `ear-training.html`。计分题优先选择**同一录音者**的材料，减少“靠音色猜答案”的偏差。
+
+| 训练 | Wikimedia Commons 文件 | 录音信息 | 许可 |
+|---|---|---|---|
+| cǐ / 此 | [Zh-ci.ogg](https://commons.wikimedia.org/wiki/File:Zh-ci.ogg) | Yue Tan；辽宁 | CC BY-SA 3.0 US |
+| chǐ / 尺 | [Zh-chi.ogg](https://commons.wikimedia.org/wiki/File:Zh-chi.ogg) | Yue Tan；辽宁 | CC BY-SA 3.0 US |
+| má / 麻 | [Zh-má.ogg](https://commons.wikimedia.org/wiki/File:Zh-m%C3%A1.ogg) | Yue Tan；辽宁 | CC BY-SA 3.0 US |
+| mà / 骂 | [Zh-mà.ogg](https://commons.wikimedia.org/wiki/File:Zh-m%C3%A0.ogg) | Yue Tan；辽宁 | CC BY-SA 3.0 US |
+| qī / 七 | [Zh-qī.ogg](https://commons.wikimedia.org/wiki/File:Zh-q%C4%AB.ogg) | Wei Gao、Vion Nicolas；北京 | CC BY 2.0 FR |
+| xī / 西 | [Zh-xī.ogg](https://commons.wikimedia.org/wiki/File:Zh-x%C4%AB.ogg) | Wei Gao、Vion Nicolas；北京 | CC BY 2.0 FR |
+| jǐ / 几 | [Zh-jǐ.ogg](https://commons.wikimedia.org/wiki/File:Zh-j%C7%90.ogg) | Wei Gao、Vion Nicolas；北京 | CC BY 2.0 FR |
+| zhì / 致 | [Zh-zhì.ogg](https://commons.wikimedia.org/wiki/File:Zh-zh%C3%AC.ogg) | Yue Tan；辽宁 | CC BY-SA 3.0 US |
+| zì / 字 | [Zh-zì.ogg](https://commons.wikimedia.org/wiki/File:Zh-z%C3%AC.ogg) | Wei Gao、Vion Nicolas；北京 | CC BY 2.0 FR |
+
+### 为什么有些录音只用于跟读、不用于计分？
+
+录音者不同、声调不同或韵母不同，会给孩子额外线索。例如一个选项总是男声、另一个总是女声，孩子可能“猜音色”而不是分辨拼音。因此这些素材仍可用于模仿跟读，但不会进入公平听辨题库。
