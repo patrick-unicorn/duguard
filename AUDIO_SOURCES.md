@@ -47,3 +47,17 @@ Shtooka Project 录音在 Commons 文件页中列明原作者与许可。请以�
 ### 为什么有些录音只用于跟读、不用于计分？
 
 录音者不同、声调不同或韵母不同，会给孩子额外线索。例如一个选项总是男声、另一个总是女声，孩子可能“猜音色”而不是分辨拼音。因此这些素材仍可用于模仿跟读，但不会进入公平听辨题库。
+
+
+## 2026-09-24 新增公平辨音组
+
+以下两组继续遵循“同录音者 + 同声调 + 同韵母”的控制原则：
+
+| 训练 | Wikimedia Commons 文件 | 录音信息 | 许可 |
+|---|---|---|---|
+| gè / 个 | [Zh-gè.ogg](https://commons.wikimedia.org/wiki/File:Zh-g%C3%A8.ogg) | Wei Gao、Vion Nicolas；北京 | CC BY 2.0 FR |
+| kè / 课 | [Zh-kè.ogg](https://commons.wikimedia.org/wiki/File:Zh-k%C3%A8.ogg) | Wei Gao、Vion Nicolas；北京 | CC BY 2.0 FR |
+| sì / 四 | [Zh-sì.ogg](https://commons.wikimedia.org/wiki/File:Zh-s%C3%AC.ogg) | Wei Gao、Vion Nicolas；北京 | CC BY 2.0 FR |
+| shì / 试 | [Zh-shì.ogg](https://commons.wikimedia.org/wiki/File:Zh-sh%C3%AC.ogg) | Wei Gao、Vion Nicolas；北京 | CC BY 2.0 FR |
+
+听音训练页还会在本地记录每个目标音的错误次数。智能复习模式会提高错音的抽题权重；答对后逐步降低权重。学习记录只保存在当前浏览器的 localStorage 中。
