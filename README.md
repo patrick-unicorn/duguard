@@ -1,5 +1,9 @@
 # 🎮 互动版入口
 
+> 🌐 **在线学习：** https://patrick-unicorn.github.io/duguard/  
+> 🗺️ **30 天闯关：** https://patrick-unicorn.github.io/duguard/30-days.html
+
+
 ## 🗺️ 30 天闯关版
 
 - [打开 30 天学习地图](./30-days.html)
