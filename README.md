@@ -2,7 +2,8 @@
 
 > 🌐 **在线学习：** https://patrick-unicorn.github.io/duguard/  
 > 🗺️ **30 天闯关：** https://patrick-unicorn.github.io/duguard/30-days.html  
-> 👂 **真人听音训练：** https://patrick-unicorn.github.io/duguard/ear-training.html
+> 👂 **真人听音训练：** https://patrick-unicorn.github.io/duguard/ear-training.html  
+> 🧠 听音训练支持 **10题小关卡 + 错音自动复习 + 正确率统计**。
 
 
 ## 🗺️ 30 天闯关版
