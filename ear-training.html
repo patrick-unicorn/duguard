@@ -4,22 +4,22 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>拼音小勇士 · 听音训练场</title>
-<meta name="description" content="给孩子的普通话拼音听音辨音游戏，真人公开录音优先。">
+<meta name="description" content="给孩子的普通话拼音听音辨音游戏，真人公开录音优先，并自动复习容易出错的音。">
 <style>
 :root{--ink:#253653;--blue:#4e68d8;--gold:#ffd35f;--pink:#ff86b4;--mint:#bdebc9;--paper:#fffdf7;--red:#e95f72}
 *{box-sizing:border-box}
 body{margin:0;font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;color:var(--ink);
 background:radial-gradient(circle at 12% 10%,#fff8c7 0 8%,transparent 8.4%),linear-gradient(180deg,#dff4ff,#f7efff 48%,#fff9e7);min-height:100vh}
 .wrap{max-width:980px;margin:auto;padding:16px}
-.top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;position:sticky;top:0;z-index:20;background:rgba(255,255,255,.9);
+.top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);
 backdrop-filter:blur(10px);padding:12px 14px;border-radius:22px;box-shadow:0 8px 28px #41506d18}
 .top a{text-decoration:none;color:var(--blue);font-weight:900}.top h1{margin:0;flex:1;font-size:clamp(21px,4vw,32px)}
 .score{font-weight:900;white-space:nowrap}.hero{padding:32px 5px 18px}.hero h2{font-size:clamp(38px,7vw,68px);line-height:1.05;margin:0 0 12px}
 .hero p{font-size:19px;line-height:1.7;max-width:760px}
 .lab{background:rgba(255,255,255,.86);border:3px solid #fff;border-radius:30px;padding:22px;box-shadow:0 16px 42px #38445f18}
-.modes{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:20px}.mode{border:0;border-radius:14px;padding:10px 13px;font-weight:900;cursor:pointer;background:#eef1fb;color:#42527d}
-.mode.on{background:#334fc0;color:#fff}
-.stage{text-align:center;padding:18px 8px}.eyebrow{font-size:15px;font-weight:900;color:#72809e}.prompt{font-size:clamp(27px,5vw,44px);font-weight:900;margin:10px 0}
+.modes{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:18px}.mode{border:0;border-radius:14px;padding:10px 13px;font-weight:900;cursor:pointer;background:#eef1fb;color:#42527d}
+.mode.on{background:#334fc0;color:#fff}.sessionbar{height:10px;background:#edf0f7;border-radius:99px;overflow:hidden;margin:4px 0 18px}.sessionbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#ffd35f,#ff86b4);transition:.25s}
+.stage{text-align:center;padding:14px 8px}.eyebrow{font-size:15px;font-weight:900;color:#72809e}.prompt{font-size:clamp(27px,5vw,44px);font-weight:900;margin:10px 0}
 .listen{border:0;border-radius:50%;width:116px;height:116px;font-size:42px;cursor:pointer;background:linear-gradient(145deg,#ffd864,#ffab70);
 box-shadow:0 12px 30px #d8993d48;transition:.18s}.listen:hover{transform:scale(1.04)}.listen.playing{animation:pulse .8s infinite alternate}
 @keyframes pulse{to{transform:scale(1.08);box-shadow:0 15px 38px #d8993d65}}
@@ -29,11 +29,14 @@ box-shadow:0 12px 30px #d8993d48;transition:.18s}.listen:hover{transform:scale(1
 .answer:hover{border-color:#9aabea}.answer.good{background:#e5faeb;border-color:#7bd399}.answer.bad{background:#fff0f2;border-color:#ef8d9a}
 .feedback{min-height:88px;background:#f7f8fc;border-radius:20px;padding:14px 16px;max-width:680px;margin:auto;font-size:18px;line-height:1.6}
 .next{margin-top:15px;border:0;border-radius:16px;padding:12px 18px;background:#334fc0;color:#fff;font-weight:900;cursor:pointer;display:none}
-.cards{margin-top:24px;background:#263653;color:#fff;border-radius:28px;padding:22px}.cards h3{font-size:27px;margin:0 0 8px}
+.dashboard{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}.panel{background:rgba(255,255,255,.84);border:2px solid #fff;border-radius:24px;padding:18px}
+.panel h3{margin:0 0 10px;font-size:23px}.focus{display:flex;gap:8px;flex-wrap:wrap}.focus span{background:#fff2bd;border-radius:13px;padding:8px 10px;font-weight:900}.quiet{font-size:14px;color:#6d7890;line-height:1.55}
+.cards{margin-top:22px;background:#263653;color:#fff;border-radius:28px;padding:22px}.cards h3{font-size:27px;margin:0 0 8px}
 .practice-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.practice{border:0;border-radius:18px;background:#fff;color:#263653;padding:16px 10px;font-size:26px;font-weight:900;cursor:pointer}
 .practice small{display:block;font-size:13px;margin-top:6px;color:#6d7890}.license{font-size:13px;line-height:1.6;opacity:.8;margin-top:14px}
 .badges{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}.badge{background:#fff;border-radius:15px;padding:10px 13px;font-weight:900;box-shadow:0 5px 16px #4b56731a}
-@media(max-width:600px){.answers,.practice-grid{grid-template-columns:1fr}.listen{width:100px;height:100px}.wrap{padding:10px}.lab{padding:15px}}
+.reset{border:0;border-radius:13px;padding:8px 11px;font-weight:900;cursor:pointer;background:#eef1fb;color:#42527d}
+@media(max-width:680px){.answers,.practice-grid,.dashboard{grid-template-columns:1fr}.listen{width:100px;height:100px}.wrap{padding:10px}.lab{padding:15px}}
 </style>
 </head>
 <body>
@@ -46,39 +49,57 @@ box-shadow:0 12px 30px #d8993d48;transition:.18s}.listen:hover{transform:scale(1
 </header>
 
 <section class="hero">
-<h2>先听，<br>不要先看答案。</h2>
-<p>每一题先按大喇叭认真听，再选择你听到的拼音。计分题尽量使用<strong>同一位录音者</strong>、相同或高度可比的音节，让你真正靠耳朵分辨。</p>
-<div class="badges"><span class="badge">🎙️ 真人录音优先</span><span class="badge">👂 听辨</span><span class="badge">👄 跟读</span><span class="badge">↻ 可重听</span></div>
+<h2>听错的音，<br>会自己回来。</h2>
+<p>“智能复习”会记住容易听错的音，让它们在后面的题里更常出现。计分题优先使用同一位录音者、相同声调和韵母的真人录音，减少靠音色猜答案。</p>
+<div class="badges"><span class="badge">🎙️ 真人录音优先</span><span class="badge">🧠 错题加练</span><span class="badge">👂 听辨</span><span class="badge">👄 跟读</span></div>
 </section>
 
 <section class="lab">
 <div class="modes" id="modes">
-<button class="mode on" data-mode="mixed">🎲 混合闯关</button>
+<button class="mode on" data-mode="adaptive">🧠 智能复习</button>
+<button class="mode" data-mode="mixed">🎲 混合闯关</button>
 <button class="mode" data-mode="cch">c / ch</button>
-<button class="mode" data-mode="tones">二声 / 四声</button>
+<button class="mode" data-mode="ssh">s / sh</button>
+<button class="mode" data-mode="gk">g / k</button>
 <button class="mode" data-mode="qx">q / x</button>
+<button class="mode" data-mode="tones">二声 / 四声</button>
 </div>
+<div class="sessionbar"><i id="sessionBar"></i></div>
 
 <div class="stage">
-<div class="eyebrow" id="roundLabel">第 1 题</div>
+<div class="eyebrow" id="roundLabel">本轮 1 / 10</div>
 <div class="prompt" id="prompt">听一听，是哪个？</div>
 <button class="listen" id="listen" aria-label="播放声音">🔊</button>
-<div class="hint" id="hint">先听声音，再选答案。</div>
+<div class="hint" id="hint">准备好以后，按一下大喇叭。</div>
 <div class="answers" id="answers"></div>
-<div class="feedback" id="feedback">🎧 小诀窍：可以听两遍，但尽量先不要看提示。</div>
+<div class="feedback" id="feedback">🎧 可以听两遍，但尽量先不要看提示。</div>
 <button class="next" id="next">下一题 →</button>
 </div>
 </section>
 
+<div class="dashboard">
+<section class="panel">
+<h3>🎯 最近要多练</h3>
+<div class="focus" id="focus"></div>
+<p class="quiet">答错会增加复习权重；连续答对后，权重会慢慢降下来。</p>
+</section>
+<section class="panel">
+<h3>📊 我的耳朵成绩</h3>
+<p><b>总答题：</b><span id="attempts">0</span>　<b>正确：</b><span id="correct">0</span></p>
+<p><b>正确率：</b><span id="accuracy">—</span></p>
+<button class="reset" id="resetStats">清空听音记录</button>
+</section>
+</div>
+
 <section class="cards">
 <h3>🎤 不计分的真人跟读卡</h3>
-<p>这些录音适合听和模仿，但因为录音者、声调或韵母不同，不拿来做公平的二选一测试。</p>
+<p>这些录音适合模仿，但不一定满足“同录音者 + 同韵母 + 同声调”的公平比较条件，所以只用于跟读。</p>
 <div class="practice-grid">
 <button class="practice" data-file="Zh-jǐ.ogg">jǐ<small>几 · 北京录音</small></button>
 <button class="practice" data-file="Zh-zhì.ogg">zhì<small>致 · 辽宁录音</small></button>
 <button class="practice" data-file="Zh-zì.ogg">zì<small>字 · 北京录音</small></button>
 </div>
-<div class="license">公开录音来自 Wikimedia Commons / Shtooka Project。具体作者与许可证见 <a href="AUDIO_SOURCES.md" style="color:#fff">AUDIO_SOURCES.md</a>。</div>
+<div class="license">公开录音来自 Wikimedia Commons / Shtooka Project。作者与许可证见 <a href="AUDIO_SOURCES.md" style="color:#fff">AUDIO_SOURCES.md</a>。</div>
 </section>
 </div>
 
@@ -86,42 +107,86 @@ box-shadow:0 12px 30px #d8993d48;transition:.18s}.listen:hover{transform:scale(1
 const COMMONS="https://commons.wikimedia.org/wiki/Special:Redirect/file/";
 const bank={
   cch:[
-    {file:"Zh-ci.ogg",answer:"cǐ",choices:["cǐ","chǐ"],tip:"c：舌尖靠前；气流从前面擦出去。"},
-    {file:"Zh-chi.ogg",answer:"chǐ",choices:["cǐ","chǐ"],tip:"ch：舌尖翘起来，再送出一股气。"}
+    {id:"ci",file:"Zh-ci.ogg",answer:"cǐ",choices:["cǐ","chǐ"],tip:"c：舌尖靠前；气流从前面擦出去。"},
+    {id:"chi",file:"Zh-chi.ogg",answer:"chǐ",choices:["cǐ","chǐ"],tip:"ch：舌尖翘起来，再送出一股气。"}
   ],
-  tones:[
-    {file:"Zh-má.ogg",answer:"má",choices:["má","mà"],tip:"二声像爬坡：声音往上走 ↗"},
-    {file:"Zh-mà.ogg",answer:"mà",choices:["má","mà"],tip:"四声像滑梯：声音快速往下落 ↘"}
+  ssh:[
+    {id:"si",file:"Zh-sì.ogg",answer:"sì",choices:["sì","shì"],tip:"s：舌尖靠前，不翘舌。"},
+    {id:"shi",file:"Zh-shì.ogg",answer:"shì",choices:["sì","shì"],tip:"sh：舌尖轻轻翘起，摩擦出声。"}
+  ],
+  gk:[
+    {id:"ge",file:"Zh-gè.ogg",answer:"gè",choices:["gè","kè"],tip:"g：不送气，起音更干脆。"},
+    {id:"ke",file:"Zh-kè.ogg",answer:"kè",choices:["gè","kè"],tip:"k：明显送气，可以把手放嘴前感受气流。"}
   ],
   qx:[
-    {file:"Zh-qī.ogg",answer:"qī",choices:["qī","xī"],tip:"q：起音更有冲出的气。"},
-    {file:"Zh-xī.ogg",answer:"xī",choices:["qī","xī"],tip:"x：更像持续的细细摩擦声。"}
+    {id:"qi",file:"Zh-qī.ogg",answer:"qī",choices:["qī","xī"],tip:"q：有明显冲出的气。"},
+    {id:"xi",file:"Zh-xī.ogg",answer:"xī",choices:["qī","xī"],tip:"x：更像持续、细细的摩擦声。"}
+  ],
+  tones:[
+    {id:"ma2",file:"Zh-má.ogg",answer:"má",choices:["má","mà"],tip:"二声像爬坡：声音往上走 ↗"},
+    {id:"ma4",file:"Zh-mà.ogg",answer:"mà",choices:["má","mà"],tip:"四声像滑梯：声音快速往下落 ↘"}
   ]
 };
-let mode="mixed", current=null, answered=false, round=0;
+const groupNames={cch:"c / ch",ssh:"s / sh",gk:"g / k",qx:"q / x",tones:"二声 / 四声"};
+let mode="adaptive",current=null,answered=false,round=0,sessionCorrect=0,lastId="";
 let score=Number(localStorage.getItem("earScore")||0);
 let streak=Number(localStorage.getItem("earStreak")||0);
+let mistakes=JSON.parse(localStorage.getItem("earMistakes")||"{}");
+let stats=JSON.parse(localStorage.getItem("earStats")||'{"attempts":0,"correct":0}');
 let audio=new Audio();
 const el=id=>document.getElementById(id);
-function updateScore(){el("score").textContent=score;el("streak").textContent=streak}
+const allItems=()=>Object.keys(bank).reduce((a,k)=>a.concat(bank[k].map(x=>Object.assign({group:k},x))),[]);
 function url(file){return COMMONS+encodeURIComponent(file)}
-function pool(){return mode==="mixed"?[...bank.cch,...bank.tones,...bank.qx]:bank[mode]}
 function shuffle(a){return [...a].sort(()=>Math.random()-.5)}
 function stop(){audio.pause();audio.currentTime=0}
+function updateScore(){
+  el("score").textContent=score;el("streak").textContent=streak;
+  el("attempts").textContent=stats.attempts;el("correct").textContent=stats.correct;
+  el("accuracy").textContent=stats.attempts?Math.round(stats.correct/stats.attempts*100)+"%":"—";
+  const ranked=allItems().map(x=>({label:x.answer,n:Number(mistakes[x.id]||0)})).filter(x=>x.n>0).sort((a,b)=>b.n-a.n).slice(0,5);
+  el("focus").innerHTML=ranked.length?ranked.map(x=>"<span>"+x.label+" × "+x.n+"</span>").join(""):"<span>🌟 目前没有明显错音</span>";
+}
+function pool(){
+  if(mode==="mixed"||mode==="adaptive") return allItems();
+  return bank[mode].map(x=>Object.assign({group:mode},x));
+}
+function weightedPick(items){
+  let weighted=[];
+  items.forEach(x=>{
+    let w=1;
+    if(mode==="adaptive") w+=Math.min(6,Number(mistakes[x.id]||0)*2);
+    if(x.id===lastId) w=Math.max(1,Math.floor(w/3));
+    for(let i=0;i<w;i++) weighted.push(x);
+  });
+  return weighted[Math.floor(Math.random()*weighted.length)];
+}
 function play(file,button){
   stop();audio=new Audio(url(file));audio.preload="auto";button.classList.add("playing");
   audio.onended=()=>button.classList.remove("playing");
   audio.onerror=()=>{button.classList.remove("playing");el("hint").textContent="音频加载失败，请再点一次或稍后重试。"};
   audio.play().catch(()=>{button.classList.remove("playing");el("hint").textContent="浏览器拦截了播放，请再点一次大喇叭。"});
 }
+function finishSession(){
+  stop();answered=true;
+  el("roundLabel").textContent="本轮完成";
+  el("prompt").textContent="耳朵升级啦！";
+  el("answers").innerHTML="";
+  el("hint").textContent="10 题完成。";
+  el("feedback").innerHTML="🏆 本轮答对 <b>"+sessionCorrect+" / 10</b>。智能复习已经记下需要多练的音。";
+  el("next").textContent="再来 10 题 →";el("next").style.display="inline-block";
+  el("next").onclick=()=>{round=0;sessionCorrect=0;el("next").textContent="下一题 →";el("next").onclick=newRound;newRound();};
+  el("sessionBar").style.width="100%";
+}
 function newRound(){
+  if(round>=10){finishSession();return}
   stop();answered=false;round++;
-  const p=pool();current=p[Math.floor(Math.random()*p.length)];
-  el("roundLabel").textContent="第 "+round+" 题";
+  current=weightedPick(pool());lastId=current.id;
+  el("roundLabel").textContent="本轮 "+round+" / 10 · "+groupNames[current.group];
   el("prompt").textContent="听一听，是哪个？";
   el("hint").textContent="准备好以后，按一下大喇叭。";
-  el("feedback").textContent="🎧 小诀窍：可以听两遍，但尽量先不要看提示。";
+  el("feedback").textContent="🎧 可以听两遍，但尽量先不要看提示。";
   el("next").style.display="none";
+  el("sessionBar").style.width=((round-1)/10*100)+"%";
   const box=el("answers");box.innerHTML="";
   shuffle(current.choices).forEach(choice=>{
     const b=document.createElement("button");b.className="answer";b.textContent=choice;
@@ -134,17 +199,33 @@ function choose(choice,button){
   const ok=choice===current.answer;
   buttons.forEach(b=>{if(b.textContent===current.answer)b.classList.add("good")});
   if(!ok)button.classList.add("bad");
-  if(ok){score++;streak++;el("feedback").innerHTML="🎉 <b>听对啦！</b> "+current.tip+"<br>现在跟读一遍："+current.answer}
-  else{streak=0;el("feedback").innerHTML="没关系，正确的是 <b>"+current.answer+"</b>。"+current.tip+"<br>点大喇叭再听一次，然后跟读。"}
-  localStorage.setItem("earScore",String(score));localStorage.setItem("earStreak",String(streak));updateScore();
+  stats.attempts++;
+  if(ok){
+    stats.correct++;score++;streak++;sessionCorrect++;
+    mistakes[current.id]=Math.max(0,Number(mistakes[current.id]||0)-1);
+    el("feedback").innerHTML="🎉 <b>听对啦！</b> "+current.tip+"<br>现在跟读一遍："+current.answer;
+  }else{
+    streak=0;mistakes[current.id]=Number(mistakes[current.id]||0)+1;
+    el("feedback").innerHTML="没关系，正确的是 <b>"+current.answer+"</b>。"+current.tip+"<br>点大喇叭再听一次，然后跟读。";
+  }
+  localStorage.setItem("earScore",String(score));localStorage.setItem("earStreak",String(streak));
+  localStorage.setItem("earMistakes",JSON.stringify(mistakes));localStorage.setItem("earStats",JSON.stringify(stats));updateScore();
+  el("sessionBar").style.width=(round/10*100)+"%";
   el("next").style.display="inline-block";
 }
 el("listen").onclick=()=>{if(current){el("hint").textContent="仔细听……可以再听一次。";play(current.file,el("listen"));}};
 el("next").onclick=newRound;
 document.querySelectorAll(".mode").forEach(b=>b.onclick=()=>{
-  document.querySelectorAll(".mode").forEach(x=>x.classList.remove("on"));b.classList.add("on");mode=b.dataset.mode;round=0;newRound();
+  document.querySelectorAll(".mode").forEach(x=>x.classList.remove("on"));b.classList.add("on");mode=b.dataset.mode;round=0;sessionCorrect=0;newRound();
 });
 document.querySelectorAll(".practice").forEach(b=>b.onclick=()=>play(b.dataset.file,b));
+el("resetStats").onclick=()=>{
+  if(confirm("要清空听音成绩和错音记录吗？")){
+    score=0;streak=0;mistakes={};stats={attempts:0,correct:0};
+    ["earScore","earStreak","earMistakes","earStats"].forEach(k=>localStorage.removeItem(k));
+    updateScore();round=0;sessionCorrect=0;newRound();
+  }
+};
 updateScore();newRound();
 </script>
 </body>
