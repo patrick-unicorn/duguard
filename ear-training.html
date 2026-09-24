@@ -119,7 +119,7 @@ function newRound(){
   const p=pool();current=p[Math.floor(Math.random()*p.length)];
   el("roundLabel").textContent="第 "+round+" 题";
   el("prompt").textContent="听一听，是哪个？";
-  el("hint").textContent="先听声音，再选答案。";
+  el("hint").textContent="准备好以后，按一下大喇叭。";
   el("feedback").textContent="🎧 小诀窍：可以听两遍，但尽量先不要看提示。";
   el("next").style.display="none";
   const box=el("answers");box.innerHTML="";
@@ -127,7 +127,6 @@ function newRound(){
     const b=document.createElement("button");b.className="answer";b.textContent=choice;
     b.onclick=()=>choose(choice,b);box.appendChild(b);
   });
-  setTimeout(()=>play(current.file,el("listen")),250);
 }
 function choose(choice,button){
   if(answered)return;answered=true;
@@ -140,7 +139,7 @@ function choose(choice,button){
   localStorage.setItem("earScore",String(score));localStorage.setItem("earStreak",String(streak));updateScore();
   el("next").style.display="inline-block";
 }
-el("listen").onclick=()=>current&&play(current.file,el("listen"));
+el("listen").onclick=()=>{if(current){el("hint").textContent="仔细听……可以再听一次。";play(current.file,el("listen"));}};
 el("next").onclick=newRound;
 document.querySelectorAll(".mode").forEach(b=>b.onclick=()=>{
   document.querySelectorAll(".mode").forEach(x=>x.classList.remove("on"));b.classList.add("on");mode=b.dataset.mode;round=0;newRound();
