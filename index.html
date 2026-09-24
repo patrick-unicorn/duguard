@@ -409,6 +409,15 @@
     if(hp===0){document.getElementById('bossMsg').textContent='🏆 胜利！你已经是拼音小勇士啦！';confetti()}
     else{document.getElementById('bossMsg').textContent='加油！再读一个音节！'}
   };
+  document.querySelectorAll('[data-say]').forEach(function(el){
+    el.addEventListener('click',function(){
+      if(!('speechSynthesis' in window)){alert('这个浏览器暂时不支持语音播放。');return}
+      speechSynthesis.cancel();
+      var u=new SpeechSynthesisUtterance(el.getAttribute('data-say'));
+      u.lang='zh-CN'; u.rate=.72; u.pitch=1.05;
+      speechSynthesis.speak(u);
+    });
+  });
   paintHp();
 })();
 </script>
