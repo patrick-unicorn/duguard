@@ -1,5 +1,20 @@
 # 🎮 互动版入口
 
+## 🗺️ 30 天闯关版
+
+- [打开 30 天学习地图](./30-days.html)
+- 每天约 15 分钟，按“听 → 学 → 拼 → 玩”完成一个小关卡。
+- 支持浏览器中文语音示范、每日打卡和总进度保存。
+- 主绘本和 30 天地图都只使用静态 HTML/CSS/JavaScript，不需要安装依赖。
+
+## 🌐 GitHub Pages
+
+仓库已加入 `.github/workflows/pages.yml` 自动部署工作流。按 GitHub 当前规则，仓库需要在 **Settings → Pages → Build and deployment → Source** 选择 **GitHub Actions**，之后推送到 `main` 会自动部署。
+
+> 这是 private repository；GitHub Pages 对私有仓库的可用性取决于账号方案。
+
+---
+
 仓库已经包含可直接运行的互动绘本页面：
 
 - 打开 [index.html](./index.html) 查看源码。
