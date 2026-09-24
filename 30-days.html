@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>拼音小勇士 · 30天闯关地图</title>
+<style>
+:root{--ink:#263654;--blue:#4f6bd8;--pink:#ff7fac;--gold:#ffc857;--mint:#bfeecf;--paper:#fffdf7}
+*{box-sizing:border-box}body{margin:0;font-family:"PingFang SC","Microsoft YaHei",system-ui,sans-serif;color:var(--ink);background:linear-gradient(180deg,#dff3ff,#fff7df 42%,#f7edff);min-height:100vh}
+.wrap{max-width:1080px;margin:auto;padding:18px}.top{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.9);backdrop-filter:blur(10px);border-radius:24px;padding:14px 16px;box-shadow:0 8px 24px #56608016;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.top a{text-decoration:none;color:var(--blue);font-weight:900}.top h1{font-size:clamp(22px,4vw,34px);margin:0;flex:1}.score{font-weight:900}.bar{height:12px;background:#edf0f7;border-radius:99px;overflow:hidden;flex-basis:100%}.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--pink));transition:.3s}
+.hero{padding:34px 6px 20px}.hero h2{font-size:clamp(36px,7vw,68px);line-height:1.05;margin:0}.hero p{font-size:20px;line-height:1.7;max-width:760px}
+.weeks{display:grid;gap:24px}.week{background:rgba(255,255,255,.82);border:3px solid #fff;border-radius:30px;padding:22px;box-shadow:0 14px 38px #4e5c7e18}.week h3{margin:0 0 14px;font-size:28px}.days{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.day{background:#fff;border:2px solid #edf0f6;border-radius:20px;padding:14px;min-height:210px;display:flex;flex-direction:column;gap:8px;transition:.18s}.day:hover{transform:translateY(-3px)}.day.done{background:#edfff2;border-color:#8bd8a5}.num{font-size:14px;font-weight:900;color:#7380a0}.title{font-size:21px;font-weight:900}.pinyin{font-size:25px;font-weight:900;color:#405bad}.task{font-size:15px;line-height:1.55;flex:1}.actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.check,.speak{border:0;border-radius:13px;padding:9px 11px;font-weight:900;cursor:pointer}.check{background:#eef2ff;color:#334fc0}.done .check{background:#a6e5b9;color:#205a31}.speak{background:#fff1bd;color:#805700}.note{font-size:14px;opacity:.75}
+.panel{margin-top:24px;background:#263654;color:#fff;border-radius:28px;padding:24px}.panel h3{font-size:27px;margin-top:0}.panel p,.panel li{line-height:1.7}
+.reset{border:0;border-radius:14px;padding:10px 14px;font-weight:900;cursor:pointer}
+@media(max-width:900px){.days{grid-template-columns:repeat(2,1fr)}}@media(max-width:560px){.days{grid-template-columns:1fr}.wrap{padding:10px}.day{min-height:auto}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <a href="index.html">← 回绘本</a>
+  <h1>🗺️ 30天拼音闯关地图</h1>
+  <div class="score">完成 <span id="doneCount">0</span>/30 ⭐</div>
+  <div class="bar"><i id="bar"></i></div>
+</header>
+<section class="hero">
+  <h2>每天15分钟，<br>闯过一小关。</h2>
+  <p>不追求一次学很多。每天完成“听一听 → 学一点 → 拼一拼 → 玩一玩”，第二天先复习再前进。点击 🔊 可以听示范词；发音由浏览器的中文语音提供，不同设备声音可能略有不同。</p>
+</section>
+<div class="weeks" id="weeks"></div>
+<section class="panel">
+  <h3>👨‍👩‍👦 家长怎么判断“真的会了”？</h3>
+  <p>不要只问“会不会背拼音表”。更有用的是观察四件事：</p>
+  <ul><li>看到拼音能读出来。</li><li>听到声音能找到对应拼音。</li><li>声母和韵母能拼成音节。</li><li>加上声调后仍能读准。</li></ul>
+  <p>如果某天明显吃力，可以原地多玩一天，不需要追赶日期。</p>
+  <button class="reset" id="reset">重新开始30天</button>
+</section>
+</div>
+<script>
+const lessons=[
+[1,"六把钥匙","a o e","认识 a、o、e；用嘴型镜子游戏模仿。","啊，喔，鹅"],
+[2,"钥匙再集合","i u ü","认识 i、u、ü；听音找卡片。","衣，乌，迂"],
+[3,"声调精灵","ā á ǎ à","用手势画四声，给 a 戴四顶帽子。","妈，麻，马，骂"],
+[4,"韵母复习","a o e i u ü","随机抽卡：看到会读、听到会找。","阿姨，乌龟"],
+[5,"第一场小测","六单韵母+四声","只做游戏复习；能稳定认出即可过关。","妈妈，爸爸"],
+[6,"声母小队1","b p m f","认识 b、p、m、f；拍卡片。","爸爸，妈妈"],
+[7,"开始拼读","b + a = ba","练 ba、pa、ma、fa，先慢后快。","八，妈"],
+[8,"声母小队2","d t n l","认识 d、t、n、l；听音抢卡。","大，兔，奶"],
+[9,"拼读赛车","da ta na la","抽一张声母+一张韵母，快速合体。","大，拿，辣"],
+[10,"十日复习","b p m f d t n l","混合认读；家长故意读错让孩子纠错。","爸爸，妈妈，大米"],
+[11,"声母小队3","g k h","认识 g、k、h；练 ga、ke、hu。","哥哥，河"],
+[12,"声母小队4","j q x","认识 j、q、x；重点听差别。","鸡，七，西"],
+[13,"ü的好朋友","j q x + ü","认识 j/q/x 和 ü 相拼时两点省写。","鱼，去"],
+[14,"两周挑战","g k h j q x","混合拼读10个简单音节。","哥哥，小鱼"],
+[15,"第一次读词","mā ma / bà ba","从音节进入词语，读给家人听。","妈妈，爸爸"],
+[16,"声母小队5","zh ch sh r","认识翘舌音；配合舌头动作。","纸，吃，狮，日"],
+[17,"声母小队6","z c s","认识平舌音；和 zh/ch/sh 做对比。","字，词，丝"],
+[18,"小小辨音师","z↔zh c↔ch s↔sh","听音分类，不求快，先求分清。","四，十"],
+[19,"最后两位","y w","认识 y、w；读 ya、yi、wu。","鸭，一，五"],
+[20,"声母大集合","23个声母","找朋友、分类、随机抽读。","我，喜欢"],
+[21,"复韵母1","ai ei ui","认识复韵母；练 bai、mei、hui。","白，黑，回"],
+[22,"复韵母2","ao ou iu","练 mao、gou、niu 等简单音节。","猫，狗，牛"],
+[23,"复韵母3","ie üe er","认识 ie、üe、er；做配对游戏。","月，耳"],
+[24,"前鼻韵母","an en in un ün","听结尾鼻音；先慢读再拼读。","山，门，云"],
+[25,"后鼻韵母","ang eng ing ong","比较前鼻音和后鼻音。","羊，风，星"],
+[26,"三拼火车","g-u-a → gua","用三节车厢理解三拼音节。","瓜，家"],
+[27,"拼音寻宝","综合拼读","在家里藏10张音节卡，找到并读出。","小猫，大米"],
+[28,"我是小老师","纠错游戏","家长故意读错声调或音节，孩子纠正。","妈妈骑马"],
+[29,"我的第一句","wǒ ài mā ma","尝试读2～3个很短的带拼音句子。","我爱妈妈"],
+[30,"声音王国毕业","综合挑战","读音节、读词、辨声调，完成Boss战！","我是拼音小勇士"]
+];
+const weekNames=["第一周 · 找到魔法钥匙","第二周 · 声母小队出发","第三周 · 拼读越来越强","第四周 · 韵母新大陆","第五周 · 声音王国毕业周","加练 · 把本领变成阅读"];
+const root=document.getElementById("weeks");
+function speak(text){
+  if(!("speechSynthesis" in window)){alert("这个浏览器暂时不支持语音播放。");return}
+  speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang="zh-CN";u.rate=.72;u.pitch=1.05;speechSynthesis.speak(u);
+}
+function key(n){return "pinyinDay"+n}
+function render(){
+  root.innerHTML="";
+  for(let w=0;w<6;w++){
+    const sec=document.createElement("section");sec.className="week";
+    const h=document.createElement("h3");h.textContent="🌟 "+weekNames[w];sec.appendChild(h);
+    const grid=document.createElement("div");grid.className="days";
+    lessons.slice(w*5,w*5+5).forEach(x=>{
+      const d=document.createElement("article");d.className="day"+(localStorage.getItem(key(x[0]))==="1"?" done":"");
+      d.innerHTML='<div class="num">DAY '+x[0]+'</div><div class="title">'+x[1]+'</div><div class="pinyin">'+x[2]+'</div><div class="task">'+x[3]+'</div><div class="note">示范词：'+x[4]+'</div><div class="actions"><button class="speak">🔊 听一听</button><button class="check">'+(d.classList.contains("done")?"✓ 已完成":"完成今天")+'</button></div>';
+      d.querySelector(".speak").onclick=()=>speak(x[4]);
+      d.querySelector(".check").onclick=()=>{localStorage.setItem(key(x[0]),d.classList.contains("done")?"0":"1");render()};
+      grid.appendChild(d);
+    });sec.appendChild(grid);root.appendChild(sec);
+  }
+  let count=lessons.filter(x=>localStorage.getItem(key(x[0]))==="1").length;
+  document.getElementById("doneCount").textContent=count;document.getElementById("bar").style.width=(count/30*100)+"%";
+}
+document.getElementById("reset").onclick=()=>{if(confirm("要清空30天的打卡记录吗？")){lessons.forEach(x=>localStorage.removeItem(key(x[0])));render()}};
+render();
+</script>
+</body></html>
